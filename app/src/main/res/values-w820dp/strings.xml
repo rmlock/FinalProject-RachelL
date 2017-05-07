@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="week_one">Week One</string>
+    <string name="week_two_hour_total">Week Two Hour Total</string>
+</resources>

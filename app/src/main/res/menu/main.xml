@@ -17,7 +17,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/nav_camera"
-        android:title="Camera"
+        android:title="Photos"
         app:showAsAction="never" />
 
 

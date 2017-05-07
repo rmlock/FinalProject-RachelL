@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-import static android.R.attr.value;
 
 public class MainActivity extends AppCompatActivity {
     int quantity213 = 0;
@@ -35,16 +32,30 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference postRef;
     DatabaseReference users;
-    DatabaseReference week1;
+    DatabaseReference userInfo;
+    DatabaseReference hours;
+    DatabaseReference week1hours;
     ArrayList<hoursPeriod> hoursPeriodsArrayList;
     Users currentUser;
     String uid;
+    String newAccount;
+    hoursPeriod week1;
+    hoursPeriod week2;
+    hoursPeriod week3;
+    hoursPeriod week4;
+    hoursPeriod week5;
+    hoursPeriod week6;
+    hoursPeriod week7;
+
+    int hoursInProgress;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        database = FirebaseDatabase.getInstance();
+        hoursPeriodsArrayList = new ArrayList<>();
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -55,24 +66,77 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    uid=user.getUid();
+                    uid = user.getUid();
+//
+                    Intent i = getIntent();
+                    newAccount = i.getStringExtra("isNew");
+                    users = database.getReference("users");
+                    TextView textView = (TextView) findViewById(R.id.title);
+                    textView.setText(newAccount);
 
-                    database = FirebaseDatabase.getInstance();
-                    postRef = database.getReference("User");
-                    users = database.getReference("users").child("hours");
-                    week1 = database.getReference("users").child("hours").child("week1").child("period");
+                    if (newAccount != null) {
+                        if (newAccount.contains("yes")) {
 
-                    week1.addValueEventListener(new ValueEventListener() {
+                            String name = i.getStringExtra("name");
+                            String placement = i.getStringExtra("placement");
+                            String email = i.getStringExtra("email");
+                            currentUser = new Users(name, email, placement);
+
+
+                            week1 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "one");
+                            week2 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "two");
+                            week3 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "three");
+                            week4 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "four");
+                            week5 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "five");
+                            week6 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "six");
+                            week7 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "seven");
+                            hoursPeriodsArrayList.add(week1);
+                            hoursPeriodsArrayList.add(week2);
+                            hoursPeriodsArrayList.add(week3);
+                            hoursPeriodsArrayList.add(week4);
+                            hoursPeriodsArrayList.add(week5);
+                            hoursPeriodsArrayList.add(week6);
+                            hoursPeriodsArrayList.add(week7);
+
+                            users.child(uid).child("hours").child("week1").setValue(week1);
+                            users.child(uid).child("hours").child("week2").setValue(week2);
+                            users.child(uid).child("hours").child("week3").setValue(week3);
+                            users.child(uid).child("hours").child("week4").setValue(week4);
+                            users.child(uid).child("hours").child("week5").setValue(week5);
+                            users.child(uid).child("hours").child("week6").setValue(week6);
+                            users.child(uid).child("hours").child("week7").setValue(week7);
+                            users.child(uid).child("userInfo").setValue(currentUser);
+
+
+                        }
+                    }
+
+//
+//
+                    week1hours = database.getReference("users").child(uid).child("hours").child("week1");
+                    userInfo = database.getReference("users").child(uid).child("userInfo").child("name");
+
+
+                    week1hours.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             // This method is called once with the initial value and again
                             // whenever data at this location is updated.
 //                            String value = dataSnapshot.getValue(String.class);
-                            String hours=dataSnapshot.getValue(String.class);
-                            Log.d(TAG, "Value is: " + value);
-                            TextView textView = (TextView) findViewById(R.id.title);
-                            textView.setText(hours);
+                            int day1Hoursc = dataSnapshot.child("day1Hours").getValue(int.class);
+                            int day2Hoursc = dataSnapshot.child("day2Hours").getValue(int.class);
+                            int day3Hoursc = dataSnapshot.child("day3Hours").getValue(int.class);
+                            int day4Hoursc = dataSnapshot.child("day4Hours").getValue(int.class);
+                            int day5Hoursc = dataSnapshot.child("day5Hours").getValue(int.class);
+                            int day6Hoursc = dataSnapshot.child("day6Hours").getValue(int.class);
+                            int day7Hoursc = dataSnapshot.child("day7Hours").getValue(int.class);
+                            String periodc = dataSnapshot.child("period").getValue(String.class);
 
+                            TextView textView = (TextView) findViewById(R.id.totalhoursshowing);
+                            TextView week1 = (TextView) findViewById(R.id.week1Hours);
+                            int totalHours = (day1Hoursc + day2Hoursc + day3Hoursc + day4Hoursc + day5Hoursc + day6Hoursc + day7Hoursc);
+                            textView.setText("" + totalHours);
+                            week1.setText("" + totalHours);
 
                         }
 
@@ -82,85 +146,16 @@ public class MainActivity extends AppCompatActivity {
                             Log.w(TAG, "Failed to read value.", error.toException());
                         }
                     });
-
+//
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                    Intent intent = new Intent(MainActivity.this, StartPage.class);
-                    startActivity(intent);
-                    finish();
                 }
                 // ...
             }
         };
     }
 
-    public void increment214(View view) {
-        if (quantity214 == 8) {
-            Toast.makeText(this, "You can only work a maximum of 8 hours a day", Toast.LENGTH_SHORT).show();
-            user.getUid();
-            return;
-        }
-        quantity214++;
-
-        display214(quantity214);
-        displayTotal();
-
-
-    }
-
-    public void decrement214(View view) {
-        if (quantity214 == 0) {
-            Toast.makeText(this, "You cannot work less then 0 hours a day", Toast.LENGTH_SHORT).show();
-
-            return;
-        }
-        quantity214--;
-        display214(quantity214);
-        displayTotal();
-
-
-    }
-
-    private void display214(int numberofHours) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view214);
-        quantityTextView.setText("" + numberofHours);
-    }
-
-    public void increment213(View view) {
-        if (quantity213 == 8) {
-            Toast.makeText(this, "You can only work a maximum of 8 hours a day", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        quantity213++;
-        display(quantity213);
-        displayTotal();
-
-    }
-
-    public void decrement213(View view) {
-        if (quantity213 == 0) {
-            Toast.makeText(this, "You cannot work less then 0 hours a day", Toast.LENGTH_SHORT).show();
-
-            return;
-        }
-        quantity213--;
-        display(quantity213);
-        displayTotal();
-
-
-    }
-
-    private void display(int numberofHours) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + numberofHours);
-    }
-
-    private void displayTotal() {
-        totalHours = quantity213 + quantity214;
-        TextView totalHoursTextView = (TextView) findViewById(R.id.totalhours);
-        totalHoursTextView.setText("Total Hours: " + totalHours);
-    }
 
     @Override
     public void onStart() {
@@ -193,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.logOut:
                 mAuth.signOut();
+                Intent logout = new Intent(MainActivity.this, StartPage.class);
+                startActivity(logout);
                 return true;
             case R.id.nav_camera:
                 Intent camera = new Intent(MainActivity.this, Camera.class);
@@ -205,4 +202,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void launchWeek1(View view) {
+        Intent week1 = new Intent(MainActivity.this, WeekOne.class);
+        startActivity(week1);
+    }
 }
+

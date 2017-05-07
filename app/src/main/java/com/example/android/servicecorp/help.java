@@ -10,6 +10,8 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class help extends AppCompatActivity {
     String subject;
@@ -21,12 +23,20 @@ public class help extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     String TAG = "Main";
+    FirebaseDatabase database;
+    DatabaseReference postRef;
+    DatabaseReference users;
+    DatabaseReference userInfo;
+    String uid;
+    String name;
+
     FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -36,6 +46,13 @@ public class help extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    uid = user.getUid();
+
+                    database = FirebaseDatabase.getInstance();
+                    users = database.getReference("users").child(uid).child("userInfo");
+                    name=database.getReference().child("users").child(uid).child("userInfo").child("name").toString();
+
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -46,6 +63,19 @@ public class help extends AppCompatActivity {
                 // ...
             }
         };
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 
@@ -68,21 +98,16 @@ public class help extends AppCompatActivity {
                 break;
 
         }
-        email();
-    }
-
-    public void email() {
-        Intent email = new Intent(Intent.ACTION_SENDTO);
+        Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + contactEmail));
         email.setData(Uri.parse("mailto:"));
-        email.putExtra(Intent.EXTRA_EMAIL, contactEmail);
         email.putExtra(Intent.EXTRA_SUBJECT, subject);
-        email.putExtra(Intent.EXTRA_TEXT, "Dear " + personName + "," + " has been having an " + subject + ". The student can type more info below." + '\n' +
-                "Name:");
-
-
+        email.putExtra(Intent.EXTRA_TEXT, "Dear " + personName + "," + '\n'+ users.child("name")+
+                 " is having " + subject );
         if (email.resolveActivity(getPackageManager()) != null) {
             startActivity(email);
-        }
 
+        }
     }
+
+
 }

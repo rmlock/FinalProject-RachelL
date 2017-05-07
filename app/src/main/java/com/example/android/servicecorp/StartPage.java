@@ -35,29 +35,15 @@ public class StartPage extends AppCompatActivity {
     String name;
     FirebaseUser user;
     boolean allFields = false;
+    boolean newAccount;
 
-    Users newUser;
-    hoursPeriod week1;
-    hoursPeriod week2;
-    hoursPeriod week3;
-    hoursPeriod week4;
-    hoursPeriod week5;
-    hoursPeriod week6;
-    hoursPeriod week7;
-    hoursPeriod week8;
-    hoursPeriod week9;
-    hoursPeriod week10;
-    hoursPeriod week11;
-    hoursPeriod week12;
-    hoursPeriod week13;
-    hoursPeriod week14;
+    Users newUserRegistered;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
-        users = database.getReference("users").child("hours");
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -67,6 +53,8 @@ public class StartPage extends AppCompatActivity {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Intent intent = new Intent(StartPage.this, MainActivity.class);
+                    intent.putExtra("isNew", "no");
+
                     startActivity(intent);
                 } else {
                     // User is signed out
@@ -77,7 +65,6 @@ public class StartPage extends AppCompatActivity {
         };
         setContentView(R.layout.content_start_page);
         usersArrayList = new ArrayList<>();
-        hoursPeriodsArrayList = new ArrayList<>();
 
 
     }
@@ -104,11 +91,11 @@ public class StartPage extends AppCompatActivity {
     public void CreateNewUser(View view) {
         EditText confirmPassword = (EditText) findViewById(R.id.ConfirmPassword);
         EditText placementEditText = (EditText) findViewById(R.id.Placement);
-        String placement = placementEditText.getText().toString();
+        final String placement = placementEditText.getText().toString();
         confirmPassword.setVisibility(View.VISIBLE);
         EditText emailEditText = (EditText) findViewById(R.id.email);
         EditText passwordEditText = (EditText) findViewById(R.id.password);
-        String email = emailEditText.getText().toString();
+        final String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String confirmPasswordString = confirmPassword.getText().toString();
         EditText firstNameEditText = (EditText) findViewById(R.id.FirstName);
@@ -121,33 +108,20 @@ public class StartPage extends AppCompatActivity {
         lastName = LastNameEditText.getText().toString();
         name = lastName + " " + firstName;
         editor.putString("name", name);
-        editor.commit();
+        editor.apply();
 
         if (email.isEmpty() || password.isEmpty() || confirmPasswordString.isEmpty() || placement.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
             allFields = false;
-        }else {
-            allFields=true;
+        } else {
+            allFields = true;
         }
 
         if (allFields) {
 
             if (confirmPasswordString.equals(password)) {
-                newUser = new Users(name, email, placement);
-                week1 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "one");
-                week2 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "two");
-                week3 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "three");
-                week4 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "four");
-                week5 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "five");
-                week6 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "six");
-                week7 = new hoursPeriod(0, 0, 0, 0, 0, 0, 0, "seven");
-                hoursPeriodsArrayList.add(week1);
-                hoursPeriodsArrayList.add(week2);
-                hoursPeriodsArrayList.add(week3);
-                hoursPeriodsArrayList.add(week4);
-                hoursPeriodsArrayList.add(week5);
-                hoursPeriodsArrayList.add(week6);
-                hoursPeriodsArrayList.add(week7);
-                hoursPeriodsArrayList.add(week8);
+
+
+
 
 
                 mAuth.createUserWithEmailAndPassword(email, password)
@@ -164,21 +138,18 @@ public class StartPage extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
 
                                 } else {
+                                    Intent intent = new Intent(StartPage.this, MainActivity.class);
+                                    intent.putExtra("isNew", "yes");
+                                    intent.putExtra("name",name);
+                                    intent.putExtra("email",email);
+                                    intent.putExtra("placement",placement);
                                     Toast.makeText(StartPage.this, "User Created!",
 
                                             Toast.LENGTH_SHORT).show();
-                                    users.push().setValue(newUser);
-                                    users.child("week1").push().setValue(week1);
-                                    users.child("week2").push().setValue(week2);
-                                    users.child("week3").push().setValue(week3);
-                                    users.child("week4").push().setValue(week4);
-                                    users.child("week5").push().setValue(week5);
-                                    users.child("week6").push().setValue(week6);
-                                    users.child("week7").push().setValue(week7);
-
-                                    Intent intent = new Intent(StartPage.this, MainActivity.class);
+                                    newUserRegistered=new Users(name,email,placement);
+                                    users= database.getReference();
                                     startActivity(intent);
-                                    finish();
+
 
 
                                 }
@@ -228,6 +199,8 @@ public class StartPage extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                             } else {
                                 Intent intent = new Intent(StartPage.this, MainActivity.class);
+                                intent.putExtra("isNew", "yes");
+
                                 startActivity(intent);
 
                             }

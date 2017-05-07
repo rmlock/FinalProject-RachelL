@@ -20,7 +20,11 @@
             android:label="Welcome to ServiceCorp App" />
         <activity
             android:name=".WeekOne"
-            android:label="List"
+            android:label="Week One"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Camera"
+            android:label="Show your Service"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".help"
@@ -35,7 +39,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.servicecorp.MainActivity" />
         </activity>
-        <activity android:name=".Camera"></activity>
     </application>
 
 </manifest>

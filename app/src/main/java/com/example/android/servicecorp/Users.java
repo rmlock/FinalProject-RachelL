@@ -1,10 +1,12 @@
 package com.example.android.servicecorp;
 
+import java.io.Serializable;
+
 /**
  * Created by Rachel Lockerman on 4/16/2017.
  */
 
-public class Users {
+public class Users implements Serializable {
     String name;
     String email;
     String placement;

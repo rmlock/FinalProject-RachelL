@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="98dp"
-            android:src="@drawable/customlogo"
+                    android:src="@drawable/customlogo"
             android:id="@+id/imageView" />
 
         <TextView
@@ -40,39 +40,44 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
-            android:id="@+id/linearLayout">
+            android:id="@+id/day1Layout">
 
             <Button
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:onClick="decrement213"
+                android:onClick="decrement"
+                android:id="@+id/day1d"
+
                 android:text="-" />
 
             <TextView
-                android:layout_weight="1"
-                android:id="@+id/feb13"
-                android:textAlignment="center"
+                android:id="@+id/day1Name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="2-13-17"
+                android:layout_weight="1"
+                android:text="@string/day1Name"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:onClick="increment213"
+                android:id="@+id/day1I"
+
+                android:onClick="increment"
                 android:text="+"
-                android:id="@+id/button2" />
+                 />
 
             <TextView
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text= "0"
-                android:id="@+id/quantity_text_view"
+                android:id="@+id/day1TextView"
+                android:text="hiii"
                 android:textSize="40sp"
                 android:textAlignment="center"
 
@@ -80,13 +85,247 @@
 
 
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/day2Layout">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="decrement"
+            android:id="@+id/day2d"
+
+            android:text="-" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/day2Name"
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/day2Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="increment"
+            android:id="@+id/day2I"
+
+            android:text="+"
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/day2TextView"
+            android:textSize="40sp"
+            android:textAlignment="center"
+
+            />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/day3Layout">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="decrement"
+            android:id="@+id/day3d"
+
+            android:text="-" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/day3Name"
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/day3Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="increment"
+            android:id="@+id/day3I"
+
+            android:text="+"
+           />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text= "0"
+            android:id="@+id/day3TextView"
+            android:textSize="40sp"
+            android:textAlignment="center"
+
+            />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/day4Layout">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="decrement"
+            android:id="@+id/day4d"
+
+            android:text="-" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/day4Name"
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/day4Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="increment"
+            android:id="@+id/day4I"
+
+            android:text="+"
+        />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text= "0"
+            android:id="@+id/day4TextView"
+            android:textSize="40sp"
+            android:textAlignment="center"
+
+            />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/day5Layout">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="decrement"
+            android:id="@+id/day5d"
+
+            android:text="-" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/day5Name"
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/day5Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="increment"
+            android:id="@+id/day5I"
+
+            android:text="+"
+             />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text= "0"
+            android:id="@+id/day5TextView"
+            android:textSize="40sp"
+            android:textAlignment="center"
+
+            />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/day6Layout">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="decrement"
+            android:id="@+id/day6d"
+
+            android:text="-" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/day6Name"
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/day6Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:onClick="increment"
+            android:id="@+id/day6I"
+
+            android:text="+"
+             />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text= "0"
+            android:id="@+id/day6TextView"
+            android:textSize="40sp"
+            android:textAlignment="center"
+
+            />
+</LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
-            android:layout_below="@+id/linearLayout"
+            android:layout_below="@+id/day7Layout"
             >
 
             <Button
@@ -94,16 +333,19 @@
 
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:onClick="decrement214"
+                android:onClick="decrement"
+                android:id="@+id/day7d"
+
                 android:text="-" />
 
             <TextView
                 android:layout_weight="1"
 
-                android:id="@+id/feb14"
+                android:id="@+id/day7Name"
                 android:layout_width="0dp"
+                android:text="@string/day7Name"
+
                 android:layout_height="wrap_content"
-                android:text="2-14-17"
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -113,9 +355,11 @@
 
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:onClick="increment214"
+                android:onClick="increment"
                 android:text="+"
-                android:id="@+id/button" />
+                android:id="@+id/day7I"
+
+                />
 
             <TextView
                 android:layout_weight="1"
@@ -124,7 +368,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:text= "0"
-                android:id="@+id/quantity_text_view214"
+                android:id="@+id/day7TextView"
                 android:textAlignment="center"
                 />
 
