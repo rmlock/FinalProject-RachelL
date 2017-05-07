@@ -10,8 +10,11 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class help extends AppCompatActivity {
     String subject;
@@ -28,6 +31,7 @@ public class help extends AppCompatActivity {
     DatabaseReference users;
     DatabaseReference userInfo;
     String uid;
+    String value;
     String name;
 
     FirebaseUser user;
@@ -47,10 +51,28 @@ public class help extends AppCompatActivity {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     uid = user.getUid();
-
                     database = FirebaseDatabase.getInstance();
-                    users = database.getReference("users").child(uid).child("userInfo");
+                    users = database.getReference("users").child(uid).child("userInfo").child("name");
                     name=database.getReference().child("users").child(uid).child("userInfo").child("name").toString();
+
+
+                    // Read from the database
+                    users.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                             value = dataSnapshot.getValue(String.class);
+                            Log.d(TAG, "Value is: " + value);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                            Log.w(TAG, "Failed to read value.", error.toException());
+                        }
+                    });
+
 
 
                 } else {
@@ -101,7 +123,7 @@ public class help extends AppCompatActivity {
         Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + contactEmail));
         email.setData(Uri.parse("mailto:"));
         email.putExtra(Intent.EXTRA_SUBJECT, subject);
-        email.putExtra(Intent.EXTRA_TEXT, "Dear " + personName + "," + '\n'+ users.child("name")+
+        email.putExtra(Intent.EXTRA_TEXT, "Dear " + personName + "," + '\n'+  value+
                  " is having " + subject );
         if (email.resolveActivity(getPackageManager()) != null) {
             startActivity(email);
