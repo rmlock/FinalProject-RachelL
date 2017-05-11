@@ -1,20 +1,58 @@
 <resources>
     <string name="app_name">Service Corp Hours</string>
-    <string name="title_activity_start_page">StartPage</string>
-    <string name="title_activity_navigation">navigation</string>
+    <string name="title_activity_start_page" translatable="false">StartPage</string>
+    <string name="title_activity_navigation" translatable="false">navigation</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-<string name="day1Name">9.24.17</string>
-<string name="day2Name">9.25.17</string>
-<string name="day3Name">9-26-17</string>
-<string name="day4Name">9-27-17</string>
-<string name="day5Name">9-28-17</string>
-<string name="day6Name">9-29-17</string>
-<string name="day7Name">9-30-17</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="day1Name" translatable="false">9.30.17</string>
+    <string name="day2Name" translatable="false">9.25.17</string>
+    <string name="day3Name" translatable="false">9-26-17</string>
+    <string name="day4Name" translatable="false">9-27-17</string>
+    <string name="day5Name" translatable="false">9-28-17</string>
+    <string name="day6Name" translatable="false">9-29-17</string>
+    <string name="day7Name" translatable="false">9-30-17</string>
+    <string name="day1Name2" translatable="false">10.1.17</string>
+    <string name="day2Name2" translatable="false">10.2.17</string>
+    <string name="day3Name2" translatable="false">10.3.17</string>
+    <string name="day4Name2" translatable="false">10.4.17</string>
+    <string name="day5Name2" translatable="false">10.5.17</string>
+    <string name="day6Name2" translatable="false">10.6.17</string>
+    <string name="day7Name2" translatable="false">10.7.17</string>
     <string name="action_settings">Settings</string>
     <string name="week_one_hour_total">Week One Hour Total</string>
     <string name="week_one">Week One</string>
     <string name="week_two_hour_total">Week Two Hour Total</string>
     <string name="week_three_hour_total">Week Three Hour Total</string>
+    <string name="Toastlessthanzero">You cannot work fewer than zero hours a day</string>
+    <string name="MainGreeting">Service Corp Hour Tracking</string>
+    <string name="week_3">Week 3</string>
+    <string name="total_hours">Total Hours:</string>
+    <string name="welcomeApp">welcome</string>
+    <string name="week_2">Week 2</string>
+    <string name="weekone">Week One</string>
+    <string name="weektwo">Week One</string>
+    <string name="photos">Show your Service</string>
+    <string name="help">Help</string>
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="HomeScreenLabel">Welcome to ServiceCorp App</string>
+    <string name="total_hoursShown">Total Hours:</string>
+    <string name="app_issues">App Issues</string>
+    <string name="issues_with_placement">Issues with Placement</string>
+    <string name="issues_with_rf_system">Issues with RF system</string>
+    <string name="log_out">Log Out</string>
+    <string name="helpText">Help</string>
+    <string name="photosText">Photos</string>
+    <string name="weekLimitToast">You cannot work more than 19 hours a week</string>
+    <string name="hourMinimumToast">You cannot work more than 8 hours a day</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="upload_file">Upload File</string>
+    <string name="fileuploadconfirmation">File Uploaded!</string>
+    <string name="noPicFound">No Picture Found!</string>
 </resources>

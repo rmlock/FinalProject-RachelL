@@ -33,6 +33,7 @@ public class help extends AppCompatActivity {
     String uid;
     String value;
     String name;
+    String userString;
 
     FirebaseUser user;
 
@@ -52,8 +53,7 @@ public class help extends AppCompatActivity {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     uid = user.getUid();
                     database = FirebaseDatabase.getInstance();
-                    users = database.getReference("users").child(uid).child("userInfo").child("name");
-                    name=database.getReference().child("users").child(uid).child("userInfo").child("name").toString();
+                    users = database.getReference("users").child(uid).child("userInfo");
 
 
                     // Read from the database
@@ -62,8 +62,12 @@ public class help extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             // This method is called once with the initial value and again
                             // whenever data at this location is updated.
-                             value = dataSnapshot.getValue(String.class);
-                            Log.d(TAG, "Value is: " + value);
+                            name= dataSnapshot.child("name").getValue(String.class);
+                            userString= "Name: "+ dataSnapshot.child("name").getValue(String.class) +'\n'+
+                                    "Email: "+ dataSnapshot.child("email").getValue(String.class) +'\n'+
+                                    "Placement: "+ dataSnapshot.child("placement").getValue(String.class);
+
+
                         }
 
                         @Override
@@ -121,10 +125,9 @@ public class help extends AppCompatActivity {
 
         }
         Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + contactEmail));
-        email.setData(Uri.parse("mailto:"));
         email.putExtra(Intent.EXTRA_SUBJECT, subject);
-        email.putExtra(Intent.EXTRA_TEXT, "Dear " + personName + "," + '\n'+  value+
-                 " is having " + subject );
+        email.putExtra(Intent.EXTRA_TEXT, "Dear " + personName + "," + '\n'+  name+
+                 " is having " + subject + '\n' +userString);
         if (email.resolveActivity(getPackageManager()) != null) {
             startActivity(email);
 

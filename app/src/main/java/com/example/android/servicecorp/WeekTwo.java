@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class WeekOne extends AppCompatActivity {
+public class WeekTwo extends AppCompatActivity {
     int quantity213 = 0;
     int quantity214 = 0;
     int totalHours = quantity213 + quantity214;
@@ -33,15 +33,12 @@ public class WeekOne extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference users;
     DatabaseReference hours;
-    DatabaseReference week1hours;
+    DatabaseReference week2hours;
     DatabaseReference userInfo;
     ArrayList<hoursPeriod> hoursPeriodsArrayList;
     Users currentUser;
     String uid;
     String newAccount;
-    hoursPeriod week1;
-    hoursPeriod week2;
-    hoursPeriod week3;
     TextView day1HoursTextView;
     TextView day2HoursTextView;
     TextView day3HoursTextView;
@@ -68,7 +65,7 @@ public class WeekOne extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_week_one);
+        setContentView(R.layout.activity_week_two);
         database = FirebaseDatabase.getInstance();
         hoursPeriodsArrayList = new ArrayList<>();
 
@@ -89,7 +86,7 @@ public class WeekOne extends AppCompatActivity {
                     TextView textView = (TextView) findViewById(R.id.title);
 
 //
-                    week1hours = database.getReference("users").child(uid).child("hours").child("week1");
+                    week2hours = database.getReference("users").child(uid).child("hours").child("week2");
                     userInfo = database.getReference("users").child(uid).child("userInfo").child("name");
 // Read from the database
                     userInfo.addValueEventListener(new ValueEventListener() {
@@ -108,7 +105,7 @@ public class WeekOne extends AppCompatActivity {
                         }
                     });
 
-                    week1hours.addValueEventListener(new ValueEventListener() {
+                    week2hours.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             // This method is called once with the initial value and again
@@ -205,7 +202,7 @@ public class WeekOne extends AppCompatActivity {
                         day1Hours++;
                         currentTotal++;
                         day1HoursTextView.setText("" + day1Hours);
-                        week1hours.child("day1Hours").setValue(day1Hours);
+                        week2hours.child("day1Hours").setValue(day1Hours);
                     } else {
                         Toast.makeText(this, R.string.hourMinimumToast, Toast.LENGTH_SHORT).show();
 
@@ -218,7 +215,7 @@ public class WeekOne extends AppCompatActivity {
                         day2Hours++;
                         currentTotal++;
                         day2HoursTextView.setText("" + day2Hours);
-                        week1hours.child("day2Hours").setValue(day2Hours);
+                        week2hours.child("day2Hours").setValue(day2Hours);
                         break;
                     } else {
                         Toast.makeText(this, R.string.hourMinimumToast, Toast.LENGTH_SHORT).show();
@@ -231,7 +228,7 @@ public class WeekOne extends AppCompatActivity {
                         day3Hours++;
                         currentTotal++;
                         day1HoursTextView.setText("" + day3Hours);
-                        week1hours.child("day3Hours").setValue(day3Hours);
+                        week2hours.child("day3Hours").setValue(day3Hours);
                         break;
                     } else {
                         Toast.makeText(this, R.string.hourMinimumToast, Toast.LENGTH_SHORT).show();
@@ -244,7 +241,7 @@ public class WeekOne extends AppCompatActivity {
                         day4Hours++;
                         currentTotal++;
                         day4HoursTextView.setText("" + day4Hours);
-                        week1hours.child("day4Hours").setValue(day4Hours);
+                        week2hours.child("day4Hours").setValue(day4Hours);
                         break;
                     } else {
                         Toast.makeText(this, R.string.hourMinimumToast, Toast.LENGTH_SHORT).show();
@@ -259,7 +256,7 @@ public class WeekOne extends AppCompatActivity {
                         day5Hours++;
                         currentTotal++;
                         day5HoursTextView.setText("" + day5Hours);
-                        week1hours.child("day5Hours").setValue(day5Hours);
+                        week2hours.child("day5Hours").setValue(day5Hours);
                         break;
                     } else {
                         Toast.makeText(this, R.string.hourMinimumToast, Toast.LENGTH_SHORT).show();
@@ -272,7 +269,7 @@ public class WeekOne extends AppCompatActivity {
                         day6Hours++;
                         currentTotal++;
                         day6HoursTextView.setText("" + day6Hours);
-                        week1hours.child("day6Hours").setValue(day6Hours);
+                        week2hours.child("day6Hours").setValue(day6Hours);
                         break;
                     } else {
                         Toast.makeText(this, R.string.hourMinimumToast, Toast.LENGTH_SHORT).show();
@@ -286,7 +283,7 @@ public class WeekOne extends AppCompatActivity {
                         day7Hours++;
                         currentTotal++;
                         day7HoursTextView.setText("" + day7Hours);
-                        week1hours.child("day7Hours").setValue(day7Hours);
+                        week2hours.child("day7Hours").setValue(day7Hours);
                         break;
                     } else {
                         Toast.makeText(this, R.string.hourMinimumToast, Toast.LENGTH_SHORT).show();
@@ -305,111 +302,111 @@ public class WeekOne extends AppCompatActivity {
 
     public void decrement(View v) {
 
-            switch (v.getId()) {
+        switch (v.getId()) {
 
 
-                case R.id.day1d:
+            case R.id.day1d:
 
-                    if (day1Hours>0) {
-                        day1Hours--;
-                        currentTotal--;
-                        day1HoursTextView.setText("" + day1Hours);
-                        week1hours.child("day1Hours").setValue(day1Hours);
-                    } else {
-                        Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
+                if (day1Hours>0) {
+                    day1Hours--;
+                    currentTotal--;
+                    day1HoursTextView.setText("" + day1Hours);
+                    week2hours.child("day1Hours").setValue(day1Hours);
+                } else {
+                    Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
 
-                    }
+                }
+                break;
+
+            case R.id.day2d:
+                if (day2Hours >0) {
+
+                    day2Hours--;
+                    currentTotal--;
+                    day2HoursTextView.setText("" + day2Hours);
+                    week2hours.child("day2Hours").setValue(day2Hours);
                     break;
+                } else {
+                    Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
 
-                case R.id.day2d:
-                    if (day2Hours >0) {
+                }
+                break;
 
-                        day2Hours--;
-                        currentTotal--;
-                        day2HoursTextView.setText("" + day2Hours);
-                        week1hours.child("day2Hours").setValue(day2Hours);
-                        break;
-                    } else {
-                        Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
-
-                    }
+            case R.id.day3d:
+                if (day3Hours >0) {
+                    day3Hours--;
+                    currentTotal--;
+                    day1HoursTextView.setText("" + day3Hours);
+                    week2hours.child("day3Hours").setValue(day3Hours);
                     break;
+                } else {
+                    Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
 
-                case R.id.day3d:
-                    if (day3Hours >0) {
-                        day3Hours--;
-                        currentTotal--;
-                        day1HoursTextView.setText("" + day3Hours);
-                        week1hours.child("day3Hours").setValue(day3Hours);
-                        break;
-                    } else {
-                        Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
+                }
+                break;
 
-                    }
+            case R.id.day4d:
+                if (day4Hours >0) {
+                    day4Hours--;
+                    currentTotal--;
+                    day4HoursTextView.setText("" + day4Hours);
+                    week2hours.child("day4Hours").setValue(day4Hours);
                     break;
+                } else {
+                    Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
 
-                case R.id.day4d:
-                    if (day4Hours >0) {
-                        day4Hours--;
-                        currentTotal--;
-                        day4HoursTextView.setText("" + day4Hours);
-                        week1hours.child("day4Hours").setValue(day4Hours);
-                        break;
-                    } else {
-                        Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
+                }
+                break;
 
-                    }
+            case R.id.day5d:
+                if (day5Hours >0) {
+
+
+                    day5Hours--;
+                    currentTotal--;
+                    day5HoursTextView.setText("" + day5Hours);
+                    week2hours.child("day5Hours").setValue(day5Hours);
                     break;
+                } else {
+                    Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
 
-                case R.id.day5d:
-                    if (day5Hours >0) {
+                }
+                break;
 
-
-                        day5Hours--;
-                        currentTotal--;
-                        day5HoursTextView.setText("" + day5Hours);
-                        week1hours.child("day5Hours").setValue(day5Hours);
-                        break;
-                    } else {
-                        Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
-
-                    }
+            case R.id.day6d:
+                if (day6Hours>0) {
+                    day6Hours--;
+                    currentTotal--;
+                    day6HoursTextView.setText("" + day6Hours);
+                    week2hours.child("day6Hours").setValue(day6Hours);
                     break;
+                } else {
+                    Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
 
-                case R.id.day6d:
-                    if (day6Hours>0) {
-                        day6Hours--;
-                        currentTotal--;
-                        day6HoursTextView.setText("" + day6Hours);
-                        week1hours.child("day6Hours").setValue(day6Hours);
-                        break;
-                    } else {
-                        Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
+                }
+                break;
 
-                    }
+
+            case R.id.day7d:
+                if (day7Hours >0) {
+                    day7Hours--;
+                    currentTotal--;
+                    day7HoursTextView.setText("" + day7Hours);
+                    week2hours.child("day7Hours").setValue(day7Hours);
                     break;
+                } else {
+                    Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+            default:
+                Toast.makeText(this, "error, could not update", Toast.LENGTH_SHORT).show();
+
+                break;
 
 
-                case R.id.day7d:
-                    if (day7Hours >0) {
-                        day7Hours--;
-                        currentTotal--;
-                        day7HoursTextView.setText("" + day7Hours);
-                        week1hours.child("day7Hours").setValue(day7Hours);
-                        break;
-                    } else {
-                        Toast.makeText(this, R.string.Toastlessthanzero, Toast.LENGTH_SHORT).show();
-
-                    }
-                    break;
-                default:
-                    Toast.makeText(this, "error, could not update", Toast.LENGTH_SHORT).show();
-
-                    break;
-
-
-            }
         }
+    }
 
     @Override
     public void onStart() {
@@ -437,14 +434,14 @@ public class WeekOne extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.help:
-                Intent intent = new Intent(WeekOne.this, help.class);
+                Intent intent = new Intent(WeekTwo.this, help.class);
                 startActivity(intent);
                 return true;
             case R.id.logOut:
                 mAuth.signOut();
                 return true;
             case R.id.nav_camera:
-                Intent camera = new Intent(WeekOne.this, Camera.class);
+                Intent camera = new Intent(WeekTwo.this, Camera.class);
                 startActivity(camera);
 
 

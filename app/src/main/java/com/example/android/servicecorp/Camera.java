@@ -176,7 +176,7 @@ public class Camera extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // Get a URL to the uploaded content
                             Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            Toast.makeText(Camera.this, "File Uploaded! " + downloadUrl, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Camera.this, getString(R.string.fileuploadconfirmation) + downloadUrl, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -192,7 +192,7 @@ public class Camera extends AppCompatActivity {
 
 
         } else {
-            Toast.makeText(this, "No Picture Found!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.noPicFound, Toast.LENGTH_SHORT).show();
         }
     }
 }

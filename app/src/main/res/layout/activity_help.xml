@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="helpClick"
-            android:text="App Issues" />
+            android:text="@string/app_issues" />
 
         <Button
             android:id="@+id/PlacementSupport"
@@ -31,13 +31,13 @@
             android:onClick="helpClick"
 
             android:layout_height="wrap_content"
-            android:text="Issues with Placement" />
+            android:text="@string/issues_with_placement" />
 
         <Button
             android:id="@+id/RFCunySupport"
             android:layout_width="match_parent"
             android:onClick="helpClick"
             android:layout_height="wrap_content"
-            android:text="Issues with RF system" />
+            android:text="@string/issues_with_rf_system" />
     </LinearLayout>
 </ScrollView>

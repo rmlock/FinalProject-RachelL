@@ -8,16 +8,16 @@
     <item
 
         android:id="@+id/logOut"
-        android:title="Log Out"
+        android:title="@string/log_out"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/help"
-        android:title="Help"
+        android:title="@string/helpText"
         app:showAsAction="never" />
     <item
         android:id="@+id/nav_camera"
-        android:title="Photos"
+        android:title="@string/photosText"
         app:showAsAction="never" />
 
 

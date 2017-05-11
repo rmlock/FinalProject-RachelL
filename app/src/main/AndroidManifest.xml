@@ -17,18 +17,18 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="Welcome to ServiceCorp App" />
+            android:label="@string/HomeScreenLabel" />
         <activity
             android:name=".WeekOne"
-            android:label="Week One"
+            android:label="@string/weekone"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Camera"
-            android:label="Show your Service"
+            android:label="@string/photos"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".help"
-            android:label="Help"
+            android:label="@string/help"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".navigation"
@@ -39,6 +39,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.servicecorp.MainActivity" />
         </activity>
+        <activity android:name=".WeekTwo"></activity>
     </application>
 
 </manifest>

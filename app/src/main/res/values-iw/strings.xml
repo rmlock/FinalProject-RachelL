@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">שעות שירות</string>
+    <string name="MainGreeting">ברוך הבא</string>
+    <string name="Toastlessthanzero">אתה לא יכול לעבוד פחות מאפס שעות ביום</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="total_hours">סה\"כ שעות</string>
+    <string name="week_one">שבוע אחד</string>
+    <string name="week_one_hour_total">שבוע אחד</string>
+    <string name="week_two_hour_total">שבוע שעתיים</string>
+    <string name="week_three_hour_total">שבוע שלוש שעות</string>
+    <string name="welcome">שלום</string>
+    <string name="week_2">שבוע שני</string>
+    <string name="weekone">שבוע אחד</string>
+    <string name="photos">תמונות</string>
+    <string name="help">עֶזרָה</string>
+    <string name="sun">רִאשׁוֹן</string>
+    <string name="mon">שֵׁנִי</string>
+    <string name="tue">שְׁלִישִׁי</string>
+    <string name="wed">רביעי</string>
+    <string name="thu">חֲמִישִׁי</string>
+    <string name="fri">שִׁישִׁי</string>
+    <string name="sat">שבת</string>
+    <string name="HomeScreenLabel">ברוכים הבאים CUNY שירות קורפ
+</string>
+    <string name="total_hoursShown">שעות:</string>
+    <string name="app_issues">עזרה עם היישום</string>
+    <string name="issues_with_placement">בעיות עם מיקום</string>
+    <string name="issues_with_rf_system">נושאים עם RFCUNY</string>
+    <string name="log_out">להתנתק</string>
+    <string name="helpText">עֶזרָה</string>
+    <string name="photosText">תמונות</string>
+    <string name="weekLimitToast">לא עובד יותר מ 19 שעות בשבוע</string>
+    <string name="hourMinimumToast">לא יותר מאשר עבודה 8 שעות ביום</string>
+    <string name="select_picture">בחר תמונה</string>
+    <string name="upload_file">העלה קובץ</string>
+    <string name="fileuploadconfirmation">הקובץ הועלה! </string>
+    <string name="noPicFound">התמונה לא נמצאה!</string>
+    <string name="weektwo">שבוע שני</string>
+
+</resources>

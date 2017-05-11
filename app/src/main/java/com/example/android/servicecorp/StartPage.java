@@ -106,7 +106,7 @@ public class StartPage extends AppCompatActivity {
 
         firstName = firstNameEditText.getText().toString();
         lastName = LastNameEditText.getText().toString();
-        name = lastName + " " + firstName;
+        name = firstName + " " + lastName;
         editor.putString("name", name);
         editor.apply();
 

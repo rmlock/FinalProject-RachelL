@@ -2,4 +2,7 @@
 <resources>
     <string name="week_one">Week One</string>
     <string name="week_two_hour_total">Week Two Hour Total</string>
+    <string name="Toastlessthanzero">You cannot work fewer than zero hours a day</string>
+    <string name="week_3">Week 3</string>
+    <string name="total_hours">Total Hours:</string>
 </resources>

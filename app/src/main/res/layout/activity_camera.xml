@@ -10,7 +10,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Picture"
+        android:text="@string/select_picture"
         android:onClick="pickPhoto"
         android:id="@+id/selectPic"
 
@@ -18,7 +18,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload File"
+        android:text="@string/upload_file"
         android:onClick="uploadFile"
         android:id="@+id/upload"
 

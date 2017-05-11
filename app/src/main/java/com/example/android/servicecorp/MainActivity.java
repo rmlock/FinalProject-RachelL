@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference userInfo;
     DatabaseReference hours;
     DatabaseReference week1hours;
+    DatabaseReference week2hours;
     ArrayList<hoursPeriod> hoursPeriodsArrayList;
     Users currentUser;
     String uid;
     String newAccount;
+    String userName;
     hoursPeriod week1;
     hoursPeriod week2;
     hoursPeriod week3;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     hoursPeriod week5;
     hoursPeriod week6;
     hoursPeriod week7;
+    int week1HoursInProgress;
+    int week2HoursInProgress;
 
     int hoursInProgress;
 
@@ -71,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = getIntent();
                     newAccount = i.getStringExtra("isNew");
                     users = database.getReference("users");
-                    TextView textView = (TextView) findViewById(R.id.title);
-                    textView.setText(newAccount);
 
                     if (newAccount != null) {
                         if (newAccount.contains("yes")) {
@@ -114,9 +116,32 @@ public class MainActivity extends AppCompatActivity {
 //
 //
                     week1hours = database.getReference("users").child(uid).child("hours").child("week1");
-                    userInfo = database.getReference("users").child(uid).child("userInfo").child("name");
+                    week2hours = database.getReference("users").child(uid).child("hours").child("week2");
+                    userInfo = database.getReference("users").child(uid).child("userInfo");
+                    userInfo.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+//                            String value = dataSnapshot.getValue(String.class);
+
+                            TextView title = (TextView) findViewById(R.id.title);
+                            userName = dataSnapshot.child("name").getValue(String.class);
+                            String greeting= R.string.MainGreeting+" "+ userName;
 
 
+                            title.setText(userName);
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                            Log.w(TAG, "Failed to read value.", error.toException());
+                        }
+                    });
+//
                     week1hours.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -134,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
 
                             TextView textView = (TextView) findViewById(R.id.totalhoursshowing);
                             TextView week1 = (TextView) findViewById(R.id.week1Hours);
-                            int totalHours = (day1Hoursc + day2Hoursc + day3Hoursc + day4Hoursc + day5Hoursc + day6Hoursc + day7Hoursc);
-                            textView.setText("" + totalHours);
-                            week1.setText("" + totalHours);
+                            week1HoursInProgress = (day1Hoursc + day2Hoursc + day3Hoursc + day4Hoursc + day5Hoursc + day6Hoursc + day7Hoursc);
+                            textView.setText("" + week1HoursInProgress);
+                            week1.setText("" + week1HoursInProgress);
 
                         }
 
@@ -146,6 +171,40 @@ public class MainActivity extends AppCompatActivity {
                             Log.w(TAG, "Failed to read value.", error.toException());
                         }
                     });
+                    week2hours.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+//                            String value = dataSnapshot.getValue(String.class);
+                            int day1Hoursc = dataSnapshot.child("day1Hours").getValue(int.class);
+                            int day2Hoursc = dataSnapshot.child("day2Hours").getValue(int.class);
+                            int day3Hoursc = dataSnapshot.child("day3Hours").getValue(int.class);
+                            int day4Hoursc = dataSnapshot.child("day4Hours").getValue(int.class);
+                            int day5Hoursc = dataSnapshot.child("day5Hours").getValue(int.class);
+                            int day6Hoursc = dataSnapshot.child("day6Hours").getValue(int.class);
+                            int day7Hoursc = dataSnapshot.child("day7Hours").getValue(int.class);
+                            String periodc = dataSnapshot.child("period").getValue(String.class);
+
+                            TextView textView = (TextView) findViewById(R.id.totalhoursshowing);
+                            TextView week2 = (TextView) findViewById(R.id.week2Hours);
+                            week2HoursInProgress = (day1Hoursc + day2Hoursc + day3Hoursc + day4Hoursc + day5Hoursc + day6Hoursc + day7Hoursc);
+                            week2.setText("" + week2HoursInProgress);
+
+                            hoursInProgress=week1HoursInProgress+week2HoursInProgress;
+                            textView.setText("" + hoursInProgress);
+
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                            Log.w(TAG, "Failed to read value.", error.toException());
+                        }
+                    });
+
 //
                 } else {
                     // User is signed out
@@ -205,6 +264,12 @@ public class MainActivity extends AppCompatActivity {
     public void launchWeek1(View view) {
         Intent week1 = new Intent(MainActivity.this, WeekOne.class);
         startActivity(week1);
+    }
+
+    public void launchWeek2(View view) {
+        Intent week2 = new Intent(MainActivity.this, WeekTwo.class);
+        startActivity(week2);
+
     }
 }
 
