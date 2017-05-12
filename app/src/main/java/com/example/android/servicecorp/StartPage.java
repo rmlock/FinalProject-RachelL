@@ -199,7 +199,7 @@ public class StartPage extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                             } else {
                                 Intent intent = new Intent(StartPage.this, MainActivity.class);
-                                intent.putExtra("isNew", "yes");
+                                intent.putExtra("isNew", "no");
 
                                 startActivity(intent);
 

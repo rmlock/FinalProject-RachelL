@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     users = database.getReference("users");
 
                     if (newAccount != null) {
-                        if (newAccount.contains("yes")) {
+                        if (newAccount.equals("yes")) {
 
                             String name = i.getStringExtra("name");
                             String placement = i.getStringExtra("placement");
